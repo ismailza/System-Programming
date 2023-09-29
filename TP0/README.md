@@ -278,13 +278,183 @@ Cette commande liste les fichiers et répertoires de votre répertoire personnel
 
 Un éditeur de texte joue un rôle essentiel dans la manipulation et la conservation d'informations sous forme textuelle dans des fichiers. La commande « `cat` » est une première approche simplifiée de ce service.
 
-**Utilisation de la Commande "`cat`" **: 
+**Utilisation de la Commande "`cat`" :**
+
 La commande ```$ cat > fich1``` est utilisée pour démarrer une session d'édition de texte interactive avec la commande cat. Elle permet également de rediriger les données saisies vers un fichier spécifié, en l'occurrence, "`fich1`". Cela signifie que tout ce que vous tapez pendant cette session d'édition sera enregistré dans le fichier "fich1".
 Après avoir entré le texte souhaité et appuyé sur "`CTRL D`" pour terminer la saisie, les données sont enregistrées dans le fichier "`fich1`".
 
-**Affichage du Contenu du Fichier **: 
+**Affichage du Contenu du Fichier :**
+
 La commande ```$ cat fich1``` est utilisée pour afficher le contenu du fichier "`fich1`" à l'écran. Le mot "`fich1`" est utilisé ici comme un argument pour la commande `cat`, indiquant que vous souhaitez afficher le contenu de ce fichier spécifique.
 
 Lors de l’exécution de la commande `$ cat fich1`, le statut du mot "`fich1`" est celui d'un fichier existant dans le répertoire de travail. Le contenu du fichier "fich1" sera affiché à l'écran.
 
 Il est important de noter que la commande cat est relativement basique en termes de fonctionnalités d'édition de texte. Pour des tâches d'édition de texte plus avancées, il existe des éditeurs de texte plus sophistiqués tels que `Vi`, `Emacs`, `XEmacs`, et d'autres, qui offrent un large éventail de fonctionnalités pour travailler efficacement avec des fichiers texte complexes.
+
+<h3>7.	Noms génériques et principe de fonctionnement de la commande « ls »</h3>
+
+La commande « `ls -a` » a été utilisée pour éditer la liste triée de tous les noms de fichiers du répertoire courant. Cependant, il est important de comprendre le fonctionnement de la commande « `ls` » et comment le shell gère `les noms génériques` de fichiers, également appelés `méta-caractères`.
+
+**Construction de la sous-arborescence **: 
+Une sous-arborescence a été créée sous le répertoire "`rep`" avec plusieurs niveaux de répertoires et de fichiers, y compris des fichiers cachés.
+
+**Résultats des commandes :**
+
+```
+$ ls
+```
+Cette commande affiche les fichiers et répertoires du répertoire courant de manière concise, en excluant les fichiers cachés.
+
+```
+$ ls .
+```
+Cette commande affiche les fichiers et répertoires du répertoire courant de manière concise, y compris les fichiers cachés (notés par un point).
+
+```
+$ ls ..
+```
+Cette commande affiche les fichiers et répertoires du répertoire parent du répertoire courant de manière concise.
+
+```
+$ ls -a
+```
+Cette commande affiche tous les fichiers et répertoires du répertoire courant, y compris les fichiers cachés.
+
+```
+$ ls -a .
+```
+Cette commande affiche tous les fichiers et répertoires du répertoire courant, y compris les fichiers cachés, en spécifiant le répertoire courant avec un point.
+
+```
+$ ls -a ..
+```
+Cette commande affiche tous les fichiers et répertoires du répertoire parent du répertoire courant, y compris les fichiers cachés.
+
+**Expansion des noms génériques :**
+
+Le shell effectue l'expansion des noms génériques en suivant des règles précises de substitution. Voici comment il réalise cette expansion pour certains exemples :
+-	`*` : Correspond à n'importe quelle chaîne de caractères.
+-	`.*` : Correspond à tous les fichiers et répertoires cachés du répertoire courant.
+-	`*/*` : Correspond à tous les fichiers et répertoires situés dans des sous-répertoires du répertoire courant.
+-	`*/.*` : Correspond à tous les fichiers cachés situés dans des sous-répertoires du répertoire courant.
+-	`.*/*` : Correspond à tous les fichiers et répertoires situés dans des sous-répertoires dont le nom commence par un point.
+-	`.*/.*` : Correspond à tous les fichiers et répertoires dont le nom commence par un point situés dans des sous-répertoires dont le nom commence par un point.
+
+Après avoir créé la sous-arborescence sous "`rep`" comme spécifié, les commandes suivantes ont été utilisées pour obtenir les résultats :
+Tous les fichiers dont les noms sont un nombre compris entre 20 et 40 :
+```
+$ ls [2-4][0-9] 
+```
+
+Tous les fichiers dont le nom ne commence pas par « s. » :
+```
+$ ls [!s]* 
+```
+
+Recherche la chaîne de caractères "le système unix" en ignorant la casse et compte le nombre de ligne correspondant à l'occurrence de la chaîne :
+```
+$ grep -i "le système unix" fichier | wc -l 
+```
+
+<h4>Exercice 1</h4>
+
+Pour que l'utilisateur "c1" modifie les droits d'accès sur le fichier "Fich1" afin d'obtenir la permission souhaitée "`-rwxr-xr-x 1 c1 cours884 Jul 7 Fich1`", il peut utiliser la commande chmod. Voici deux solutions : une solution numérique et une solution avec les actions.
+
+**Solution numérique :**
+
+La notation numérique des droits d'accès est une méthode couramment utilisée pour définir les permissions. Chaque type de permission est associé à un chiffre :
+-	Lecture (r) : 4
+-	Écriture (w) : 2
+-	Exécution (x) : 1
+
+Pour obtenir "`-rwxr-xr-x`", l'utilisateur "c1" doit donner toutes les permissions à lui-même (`7`) et les permissions de lecture et d'exécution aux autres (`5`). Voici la commande :
+```
+$ chmod 755 Fich1
+```
+
+**Solution avec les actions :**
+
+On peut également modifier les droits d'accès en utilisant des actions "+" et "-" pour ajouter ou supprimer des permissions. Voici la séquence d'actions pour atteindre le résultat souhaité :
+```
+$ chmod u=rwx Fich1   # Donne toutes les permissions à l'utilisateur c1 (rwx).
+```
+```
+$ chmod go=rx Fich1   # Donne la permission de lecture et d'exécution aux autres (go).
+```
+
+<h4>Exercice 2</h4>
+
+Pour déterminer si les utilisateurs « c1 », « c2 » et « guest » peuvent exécuter les commandes données dans chaque configuration, nous devons examiner les droits d'accès sur le répertoire « d1 » ainsi que les droits d'accès sur le fichier « f1 » dans chaque configuration, en utilisant les règles suivantes :
+
+a.	Pour accéder à un fichier, il faut avoir le droit de passage dans chacun des répertoires qui constituent son chemin (le droit de passage dans un répertoire est le droit d'exécution « x »).
+
+b.	Pour écrire dans un fichier, il faut avoir l'autorisation d'écriture (« w ») sur ce fichier.
+
+c.	Pour modifier les droits d'un fichier, il faut en être le propriétaire.
+
+d.	Pour créer ou détruire un fichier, il faut avoir le droit d'écriture dans le répertoire contenant ce fichier, puisqu'il s'agit d'ajouter ou de supprimer un lien dans un répertoire.
+
+**1.	Configuration 1 :**
+```
+drwxr-xr-- 2 c1 cours 1152 Jul 7 14:49 d1
+-rw-rw-r-- 1 c1 cours 884 Jul 7 14:52 d1/f1
+```
+
+- `$ cp /tmp/x f1` Les utilisateurs "c1" et "c2" peuvent exécuter cette commande car ils ont le droit d'écriture sur le fichier "f1" en tant que membres du groupe "cours".
+-	`$ cp /tmp/x f2` Seul l’utilisateur "c1" peut exécuter cette commande car c’est le seul qui a le droit d'écriture dans le répertoire "d1".
+-	`$ rm f1` Seul l’utilisateur "c1" peut exécuter cette commande car c’est le seul qui a le droit d'écriture dans le répertoire "d1".
+
+**2.	Configuration 2 :**
+```
+drwxrwxr-x 2 c1 cours 1152 Jul 7 14:49 d1
+-rw-r--r-- 1 c1 cours 884 Jul 7 14:52 d1/f1
+```
+-	`$ cp /tmp/x f1` Seul l’utilisateur "c1" permet d’exécuter cette commande, car c’est le seul qui a le droit d’écriture sur le fichier "f1".
+-	`$ cp /tmp/x f2` Les utilisateurs "c1" et "c2" peuvent également exécuter cette commande car ils ont le droit d'écriture dans le répertoire "d1" en tant que membres du groupe "cours".
+-	`$ rm f1` Les utilisateurs "c1" et "c2" peuvent exécuter cette commande car ils ont le droit d'écriture sur "f1".
+
+**3.	Configuration 3 :**
+```
+drwxrwxr-x 2 c1 cours 1152 Jul 7 14:49 d1
+--------- 1 c1 cours 884 Jul 7 14:52 d1/f1
+```
+-	`$ cp /tmp/x f1` Aucun des utilisateurs ne peut pas exécuter cette commande, car ils n’ont pas le droit d’écriture sur le fichier "f1".
+-	`$ cp /tmp/x f2` Les utilisateurs "c1" et "c2" peuvent également exécuter cette commande car ils ont le droit d'écriture dans le répertoire "d1" en tant que membres du groupe "cours".
+-	`$ rm f1` Les utilisateurs "c1" et "c2" peuvent exécuter cette commande car ils ont le droit d'écriture sur "f1".
+
+<h4>Exercice 3</h4>
+
+La commande "`umask`" est utilisée pour définir les permissions par défaut des fichiers nouvellement créés dans un système Unix ou Linux. Elle agit en masquant les permissions que vous ne souhaitez pas accorder par défaut. En d'autres termes, elle spécifie les autorisations qui seront retirées des fichiers lors de leur création. La valeur de la commande "`umask`" est soustraite des autorisations par défaut pour déterminer les autorisations réelles des fichiers créés.
+
+Pour créer un sous-répertoire "rep1" avec les droits "`rwxrw-r--`" dès sa création, on doit utiliser la commande "`umask`" pour définir la valeur appropriée avant de créer le répertoire. 
+
+En comparant les permissions du répertoire "`rep1`" et du fichier "`f1`", on constate que le répertoire "rep1" a les droits "`drwxrw-r--`", tandis que le fichier "f1" a les droits "`-rw-rw-r--`".
+
+Cela démontre que la commande "`umask`" affecte les valeurs par défaut des permissions des fichiers et des répertoires nouvellement créés. Les répertoires ont généralement des permissions par défaut plus permissives que les fichiers, car ils doivent permettre l'accès aux fichiers qu'ils contiennent.
+
+<h4>Exercice 4</h4>
+
+Pour tester l'existence d'un fichier ou d'un répertoire dans un système Unix ou Linux, on peut utiliser la commande "`test`" avec l'option "`-e`". La syntaxe générale est la suivante :
+
+```
+$ test -e chemin_vers_le_fichier_ou_répertoire
+```
+Ou en utilisant la forme abrégée avec des crochets :
+
+```
+$ [ -e chemin_vers_le_fichier_ou_répertoire ]
+```
+Si le fichier ou le répertoire existe, la commande renverra un code de retour (exit code) de 0, ce qui indique le succès. Si le fichier ou le répertoire n'existe pas, la commande renverra un code de retour différent de 0, ce qui indique l'échec.
+
+Pour récupérer le résultat, on peut afficher le code de retour par la commande : 
+```
+$ echo $? 
+```
+ou bien utiliser un script shell pour conditionner des actions en fonction de l'existence d'un fichier ou d'un répertoire :
+```
+if [ -e "/chemin/vers/le/fichier_ou_repertoire" ]; then
+    echo "Le fichier ou répertoire existe."
+else
+    echo "Le fichier ou répertoire n'existe pas."
+fi
+```
