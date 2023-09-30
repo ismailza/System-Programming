@@ -458,3 +458,115 @@ else
     echo "Le fichier ou répertoire n'existe pas."
 fi
 ```
+
+<h3>8.  Communication entre processus : première approche</h3>
+<h4>Exercice 1</h4>
+
+1. Exécuter la ligne de commande :
+```
+$ ps -alx | grep bash
+```
+
+2. Création d'un fichier `text1`:
+```
+cat > text1
+1 : la commande pipe sert à la communication entre processus
+3 : la commande tee est utile pour capturer les informations qui circulent dans un pipe
+2 : la commande tee recopie son entrée standard sur sa sortie standard et sur un fichier
+4 : la commande tee peut être utilisée pour sauvegarder dans un fichier les traces des informations qui circulent sur sa sortie standard.
+1 : qu’est-ce qu’un pipe et que fait la commande tee ?
+```
+  i. le nombre de ligne contenant le mot « `pipe` » dans le fichier « text1 »:
+  ```
+  $ grep pipe text1 | wc -l
+  ```
+
+  ii. récupérer dans un fichier « `text2` » les lignes contenant le mot « `pipe` »:
+  ```
+  $ grep pipe text1 | tee text2
+  ```
+
+  iii. Ecrire une ligne de commande qui permettent de créer un fichier « text3 » qui contiendra les lignes du fichier « text1 » contenant le mot « `pipe` ». Ces lignes devront être triées sur le premier champ de chaque ligne. Enfin la commande affiche le nombre de ces lignes:
+  ```
+  $ grep pipe text1 | sort -n | tee text3 | wc -l
+  ```
+
+<h4>Exercice 2</h4>
+
+  a.	Nombre de processus actifs sur le système : 
+  ```
+  $ ps | wc -l
+  ```
+
+  b.	
+  -	Nombre d’utilisateurs connectés sur le système :   
+    ```
+    $ who | wc -l 
+    ```
+  -	Liste triée des utilisateurs connectés sur le système
+    
+    i.	Par ordre alphabétique : 
+      ```
+      $ who | sort
+      ```
+    ii.	Selon l’heure de connexion : 
+      ```
+      $ who | sort -k3,4
+      ```
+
+  c.	Nombre de fichiers répertoire dans le répertoire "`/etc`" : 
+  ```
+  $ ls -l /etc | grep "^-" | wc -l
+  ```
+
+  d.	Nombre de sous-répertoires dans le répertoire "`/etc`" : 
+  ```
+  $ ls -l /etc | grep "^d" | wc -l
+  ```
+
+  e.	Liste des fichiers du répertoire courant, triée par ordre de taille des fichiers : 
+  ```
+  $ ls -lS
+  ```
+
+<h4>Exercice 3</h4>
+
+  1.	Création des fichiers fich1 et fich2 en utilisant la commande "`cat`" :
+  ```
+  $ cat > fich1
+  Contenu du fichier fich1.
+  ^D 	# sauvegarder le fichier
+  $ cat > fich2
+  Contenu du fichier fich2.
+  ^D 	# sauvegarder le fichier
+  ```
+  
+  Création de fichier fich3 constituant la concaténation de fich1 et fich2 :
+  ```
+  $ cat fich1 fich2 > fich3
+  ```
+
+  2.	En exécutant la commande 
+  ```
+  $ cat fich1 fich-inexistant 
+  ```
+  avec "fich1" existant et "fich-inexistant" inexistant, elle affiche le contenu du fichier "fich1" puis un message d’erreur indiquant que "fich-inexistant" n'existe pas.
+
+  3.	Les deux commandes 
+  ```
+  $ cat fich1 fich-inexistant > trace 
+  ```
+  et 
+  ```
+  $ cat fich1 fich-inexistant 1>trace 
+  ```
+  redirigent la sortie standard vers un fichier nommé "`trace`". La différence réside dans la façon dont la redirection est spécifiée. La première commande utilise uniquement `>`, tandis que la deuxième utilise `1>` pour indiquer explicitement la redirection de la sortie standard.
+
+  4.	Pour lancer la commande 
+  ```
+  $ cat fich1 fich-inexistant
+  ```
+  en redirigeant la sortie d'erreur vers le fichier "`err`", on peut utiliser `2>` pour la redirection de la sortie d'erreur : 
+  ```
+  $ cat fich1 fich-inexistant 2> err
+  ```
