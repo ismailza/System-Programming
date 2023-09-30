@@ -570,3 +570,58 @@ cat > text1
   ```
   $ cat fich1 fich-inexistant 2> err
   ```
+<h3>9.	Gestion des processus</h3>
+
+Pour commencer, nous avons créé les fichiers de commandes "`com1`", "`com2`", et "`com3`". Cependant, lors de l'exécution de "com1", nous avons rencontré un problème où "com1" n'était pas trouvé. Pour résoudre ce problème, nous avons suivi les étapes suivantes :
+
+**1.	Spécifier le chemin du fichier exécutable ou ajouter au PATH**
+
+Lors de l'exécution de "com1" avec ````$ ./com1````, nous avons spécifié le chemin relatif du fichier "`com1`". Pour que cela fonctionne, nous pouvons également ajouter le chemin du répertoire contenant "com1" au `PATH` en utilisant la commande suivante :
+```
+$ PATH=$PATH:`pwd`
+```
+Cela permet au shell de rechercher les exécutables dans le répertoire actuel.
+
+**2.	Ajouter le droit d'exécution**
+
+Après avoir résolu le problème de recherche de fichier, nous avons rencontré un autre problème de permissions. Pour résoudre ce problème, nous avons ajouté le droit d'exécution au fichier "com1" en utilisant la commande `chmod` :
+```
+$ chmod u=rwx com1
+```
+Cela accorde le droit d'exécution au fichier "com1", permettant son exécution.
+
+**3.	Ajouter le droit d'exécution à "com2" et "com3"**
+
+Enfin, pour exécuter "com1" avec succès, nous avons ajouté le droit d'exécution aux fichiers "com2" et "com3" en utilisant les commandes suivantes :
+```
+$ chmod u=rwx com2
+$ chmod u=rwx com3
+```
+Après avoir suivi ces étapes, nous avons pu lancer "com1" avec succès en utilisant la commande `$ com1`. Pour rediriger les traces dans un fichier "trace1", nous avons utilisé la commande 
+```
+$ com1 > trace1
+```
+
+**Utilisation de la commande "."**
+
+Pour utiliser la commande "`.`", nous avons repris les fichiers correspondant aux commandes "com1", "com2", et "com3" et remplacé les appels aux commandes "com?" par ". com?". Nous avons créé de nouveaux fichiers "com1p", "com2p", et "com3p" ainsi modifiés.
+
+Après la création de ces fichiers, nous avons ajouter le droit d’exécution à ces fichiers en utilisant la commande chmod.
+Pour lancer "com1p" en utilisant la commande `$ ./com1p` et rediriger les traces dans le fichier "trace2", nous avons utilisé la commande suivante :
+```
+$ ./com1p > trace2
+```
+
+**Utilisation de la commande ” exec ”**
+
+Pour utiliser la commande " exec ", nous avons repris les fichiers correspondant aux commandes "com1", "com2", et "com3" et remplacé les appels aux commandes "com?" par "exec com?". Nous avons créé de nouveaux fichiers "com1e", "com2e", et "com3e" ainsi modifiés.
+
+Pour lancer "com1e" en utilisant la commande exec et rediriger les traces dans le fichier "trace3", nous avons utilisé la commande suivante :
+```
+$ exec com1e > trace3
+```
+
+**Conclusion**
+
+La gestion des processus en utilisant le shell Bash nécessite une attention particulière aux `chemins` d'accès aux fichiers exécutables et aux `permissions`. Les problèmes liés à la recherche de fichiers peuvent être résolus en spécifiant des chemins relatifs ou absolus ou en modifiant la variable `$PATH`. 
+De plus, les problèmes de permissions peuvent être résolus en utilisant la commande chmod pour accorder les droits d'exécution nécessaires aux fichiers.
