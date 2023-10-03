@@ -274,3 +274,19 @@ $ ls -l
 ```
 Cette commande liste les fichiers et répertoires de votre répertoire personnel.
 
+<h3>5.	Les éditeurs de texte</h3>
+
+Un éditeur de texte joue un rôle essentiel dans la manipulation et la conservation d'informations sous forme textuelle dans des fichiers. La commande « `cat` » est une première approche simplifiée de ce service.
+
+**Utilisation de la Commande "`cat`" :**
+
+La commande ```$ cat > fich1``` est utilisée pour démarrer une session d'édition de texte interactive avec la commande cat. Elle permet également de rediriger les données saisies vers un fichier spécifié, en l'occurrence, "`fich1`". Cela signifie que tout ce que vous tapez pendant cette session d'édition sera enregistré dans le fichier "fich1".
+Après avoir entré le texte souhaité et appuyé sur "`CTRL D`" pour terminer la saisie, les données sont enregistrées dans le fichier "`fich1`".
+
+**Affichage du Contenu du Fichier :**
+
+La commande ```$ cat fich1``` est utilisée pour afficher le contenu du fichier "`fich1`" à l'écran. Le mot "`fich1`" est utilisé ici comme un argument pour la commande `cat`, indiquant que vous souhaitez afficher le contenu de ce fichier spécifique.
+
+Lors de l’exécution de la commande `$ cat fich1`, le statut du mot "`fich1`" est celui d'un fichier existant dans le répertoire de travail. Le contenu du fichier "fich1" sera affiché à l'écran.
+
+Il est important de noter que la commande cat est relativement basique en termes de fonctionnalités d'édition de texte. Pour des tâches d'édition de texte plus avancées, il existe des éditeurs de texte plus sophistiqués tels que `Vi`, `Emacs`, `XEmacs`, et d'autres, qui offrent un large éventail de fonctionnalités pour travailler efficacement avec des fichiers texte complexes.
