@@ -80,3 +80,55 @@ Pour quitter le manuel, il suffit de taper la lettre « `q` » (comme « `quit` 
 $man man
 ```
 Cette commande permet d’accéder au manuel de la commande "`man`" elle-même.
+
+<h3>3.	Quelques commandes utiles</h3>
+
+```
+$ cat
+``` 
+Cette commande est utilisée pour concaténer et afficher le contenu des fichiers texte.
+
+```
+$ date
+``` 
+Cette commande affiche la date et l'heure actuelles du système.
+
+```
+$ wc
+``` 
+Cette commande compte le nombre de lignes, de mots et d'octets dans un fichier.
+
+```
+$ wc -l
+``` 
+Cette commande compte uniquement le nombre de lignes dans un fichier.
+
+```
+$ cal
+``` 
+Cette commande affiche un calendrier du mois en cours.
+
+```
+$ cal -j
+``` 
+Cette commande affiche un calendrier en utilisant le format julien, qui est un système de comptage des jours.
+
+```
+$ which
+```
+Cette commande recherche et affiche le chemin de l'exécutable d’une commande.
+
+```
+$ touch 
+```
+Cette commande crée un nouveau fichier vide dans le répertoire courant.
+
+```
+$ grep
+```
+Cette commande recherche un mot dans un fichier et affiche toutes les lignes qui contiennent ce mot.
+
+```
+$ dd 
+```
+Cette commande est un utilitaire de transfert de données puissant et flexible. Si elle est utilisée sans arguments, elle attend que l'utilisateur fournisse une entrée.
