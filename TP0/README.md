@@ -132,3 +132,145 @@ Cette commande recherche un mot dans un fichier et affiche toutes les lignes qui
 $ dd 
 ```
 Cette commande est un utilitaire de transfert de données puissant et flexible. Si elle est utilisée sans arguments, elle attend que l'utilisateur fournisse une entrée.
+
+<h3>4.	Répertoire de travail</h3>
+
+```
+$ pwd 
+```
+Cette commande affiche le répertoire de travail actuel.
+
+```
+$ ls 
+```
+Cette commande liste les fichiers et répertoires du répertoire de travail.
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires du répertoire de manière détaillée, montrant les permissions, le propriétaire, la taille, la date de modification, etc.
+
+```
+$ ls -a
+```
+Cette commande liste tous les fichiers et répertoires, y compris ceux qui sont cachés.
+
+```
+$ ls -al 
+```
+Cette commande liste tous les fichiers et répertoires du répertoire de manière détaillée, y compris les fichiers et répertoires cachés.
+
+```
+$ rm essai 
+```
+Cette commande supprime le fichier nommé "essai" du répertoire de travail.
+
+```
+$ ls -l 
+```
+Cette commande liste à nouveau les fichiers et répertoires du répertoire après avoir supprimé le fichier "essai".
+
+```
+$ mkdir SE_essais 
+```
+Cette commande crée un nouveau répertoire nommé "SE_essais" dans le répertoire de travail.
+
+```
+$ ls -l 
+```
+Cette commande liste à nouveau les fichiers et répertoires du répertoire après avoir créé le répertoire "SE_essais".
+
+```
+$ cd SE_essais
+```
+Cette commande change le répertoire de travail actuel pour le répertoire "SE_essais".
+
+```
+$ pwd 
+```
+Cette commande affiche le nouveau répertoire de travail actuel, qui est maintenant "SE_essais".
+
+```
+$ ls 
+```
+Cette commande liste les fichiers et répertoires du répertoire "SE_essais".
+
+```
+$ touch toto 
+```
+Cette commande crée un nouveau fichier nommé "toto" dans le répertoire "SE_essais".
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires du répertoire "SE_essais" après avoir créé le fichier "toto".
+
+```
+$ cd 
+```
+Cette commande ramène le répertoire de travail actuel à votre répertoire personnel.
+```
+$ pwd 
+```
+Cette commande affiche le répertoire de travail actuel, qui est votre répertoire personnel.
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires de votre répertoire personnel.
+
+```
+$ cd /etc 
+```
+Cette commande change le répertoire de travail actuel pour le répertoire système "/etc", qui contient les fichiers de configuration du système.
+
+```
+$ pwd 
+```
+Cette commande affiche le nouveau répertoire de travail actuel, qui est maintenant "/etc".
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires du répertoire "/etc".
+
+```
+$ which cd 
+```
+Cette commande recherche et affiche le chemin de l'exécutable de la commande "cd".
+
+```
+$ which date 
+```
+Cette commande recherche et affiche le chemin de l'exécutable de la commande "date".
+
+```
+$ cd /bin 
+```
+Cette commande change le répertoire de travail actuel pour le répertoire système "/bin", qui contient les exécutables de base du système.
+
+```
+$ pwd 
+```
+Cette commande affiche le nouveau répertoire de travail actuel, qui est maintenant "/bin".
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires du répertoire "/bin".
+
+```
+$ cd 
+```
+Cette commande ramène le répertoire de travail actuel à votre répertoire personnel.
+
+```
+$ pwd 
+```
+Cette commande affiche à nouveau votre répertoire personnel.
+
+```
+$ ls -l 
+```
+Cette commande liste les fichiers et répertoires de votre répertoire personnel.
+
