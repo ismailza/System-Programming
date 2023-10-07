@@ -1,0 +1,10 @@
+#!/bin/bash
+
+read -p "Entrez une suite de mots : " -a mots
+
+if [[ ${#mots[*]} < 3 ]]
+then
+	echo "Il faut au moins 3 mots"
+else
+	echo ${mots[0]} ${mots[2]}
+fi
