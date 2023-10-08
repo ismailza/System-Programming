@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# $1 : le fichier dont on veut copier le contenu dans deux fichiers
+# $2 : le premier fichier dans lequel on veut copier le contenu
+# $3 : le deuxième fichier dans lequel on veut copier le contenu
+
+cp $1 $2
+cp $1 $3
