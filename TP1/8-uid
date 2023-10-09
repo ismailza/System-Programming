@@ -1,0 +1,5 @@
+#!\bin\bash
+
+IFS=' '
+set `id`
+echo $1

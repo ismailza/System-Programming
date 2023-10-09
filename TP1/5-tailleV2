@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo " voici les droits d'accées et la taille du fichier lu  :" $1 
+echo `ls -l $1 | cut -d ' ' -f1,5`
