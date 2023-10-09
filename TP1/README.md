@@ -55,15 +55,15 @@ $ jour
 $
 ```
 
-<h3>Exercice 7<h3>
+<h3>Exercice 7</h3>
 
 Ecrire un programme shell nbconnect qui affiche le nombre d'utilisateurs connectés sur la machine locale
 
-<h3>Exercice 8<h3>
+<h3>Exercice 8</h3>
 
 Ecrire un programme shell uid qui affiche l'uid de l'utilisateur. On utilisera la commande unix id, la commande interne set et la variable prédéfinie IFS.
 
-<h3>Exercice 9<h3>
+<h3>Exercice 9</h3>
 
 En utilisant la commande unix ls et le mécanisme de redirection, écrire un programme shell
 dansbin prenant un nom de commande en argument et qui affiche 0 si cette commande est
