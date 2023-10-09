@@ -5,8 +5,4 @@
 # $3 : le deuxième fichier dans lequel on veut copier le contenu
 
 cp $1 $2
-<<<<<<< HEAD
 cp $1 $3
-=======
-cp $1 $3
->>>>>>> c1917966eb906bb1558af1d6e86a78c999db9ddc
