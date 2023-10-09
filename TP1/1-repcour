@@ -1,4 +1,8 @@
 #!/bin/bash
 
 echo mon nom de connexion est : `whoami` 
+<<<<<<< HEAD
 echo mon repertoire courant est : `pwd`
+=======
+echo mon repertoire courant est : `pwd`
+>>>>>>> c1917966eb906bb1558af1d6e86a78c999db9ddc

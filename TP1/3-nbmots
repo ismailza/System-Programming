@@ -2,4 +2,8 @@
 
 read -p "Entrez une suite de mots : " -a mots
 nbmots=${#mots[*]}
+<<<<<<< HEAD
 echo "$nbmots => $nbmots mots ont été saisis"
+=======
+echo "$nbmots => $nbmots mots ont été saisis"
+>>>>>>> c1917966eb906bb1558af1d6e86a78c999db9ddc
