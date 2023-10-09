@@ -41,3 +41,30 @@ Ecrire un programme shell `cp2fois` prenant trois arguments : le premier désign
 <h3>Exercice 5</h3>
 
 Ecrire un programme shell `taille` qui prend un nom de fichier en argument et affiche ses droits d’accès et sa taille. On ne considère aucun cas d'erreur.
+<h3>Exercice 6</h3>
+A l'aide de la commande unix date, écrire un programme shell jour qui affiche le jour courant du
+mois 
+```
+$ date 
+dimanche 22 octobre 2006, 18:33:38 (UTC+0200) 
+$ 
+$ jour 
+22 
+$
+```
+
+<h3>Exercice 7<h3>
+Ecrire un programme shell nbconnect qui affiche le nombre d'utilisateurs connectés sur la machine locale
+<h3>Exercice 8<h3>
+Ecrire un programme shell uid qui affiche l'uid de l'utilisateur. On utilisera la commande unix id, la commande interne set et la variable prédéfinie IFS.
+<h3>Exercice 9<h3>
+En utilisant la commande unix ls et le mécanisme de redirection, écrire un programme shell
+dansbin prenant un nom de commande en argument et qui affiche 0 si cette commande est
+présente dans /bin, une valeur différente de 0 sinon. 
+```
+$ dansbin ls 
+0 
+$ dansbin who 
+2 
+$
+```
