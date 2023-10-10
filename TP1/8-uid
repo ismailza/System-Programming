@@ -1,5 +1,7 @@
-#!\bin\bash
+#!/bin/bash
 
-IFS=' '
+IFS=$IFS:' ':'=':'('
+
 set `id`
-echo $1
+
+echo $2

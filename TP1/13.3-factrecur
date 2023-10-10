@@ -1,0 +1,25 @@
+#!/bin/bash
+
+shopt -s extglob
+
+if [[ $# < 1 ]]
+then
+	echo "Il faut un argument"
+	exit 1
+elif [[ $1 != +([0-9]) ]]
+then
+	echo "Il faut un entier positif"
+	exit 2
+fi
+
+function factrecur
+{
+	if [[ $1 == 0 ]]
+	then
+		return 1
+	fi
+	return (($1 * $(factrecur (($1 - 1)))))
+}
+
+res=$(factrecur $1)
+echo $res

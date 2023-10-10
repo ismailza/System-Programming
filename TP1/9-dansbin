@@ -1,3 +1,4 @@
 #!/bin/bash
-[[ -f /bin/$1 ]]
+
+[[ -e /bin/$1 ]]
 echo $?

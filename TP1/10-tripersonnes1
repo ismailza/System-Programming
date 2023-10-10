@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ ! -e personnes ]]
+then
+    echo "Le fichiers personnes n'existe pas"
+    exit 1
+elif [[ ! -f personnes ]]
+then
+    echo "personnes n'est pas un fichiers"
+    exit 2
+fi
+
+# Initialisation des fichiers garcons et filles (si ils existent deja, on les supprime)
+touch garcons filles
+
+grep -i ' m$' personnes | cut -d ' ' f-1 << garcons
+
+grep -i ' f$' personnes | cut -d ' ' f-1 << filles

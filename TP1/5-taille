@@ -2,5 +2,5 @@
 
 # $1 : le fichier dont on veut afficher ses droits d'accès et sa taille
 
-echo ls -l $1
+ls -l $1
 echo La taille du fichier $1 est : `ls -l $1 | cut -d ' ' -f5,6`

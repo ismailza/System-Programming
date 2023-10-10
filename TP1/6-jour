@@ -1,3 +1,5 @@
 #!/bin/bash
-#Pour la valeur numérique utilisé avec -f dépend du version du calendrier 
-date|cut -d ' ' -f1  
+
+# Pour la valeur numérique utilisé avec -f dépend du version du calendrier
+
+date | cut -d ' ' -f1

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+declare -ai tirage
+
+# Fonction qui vérifie si un nombre est déjà dans le tableau
+function existe
+{
+	local -i i
+	for i in ${tirage[*]}
+	do
+		if [[ $1 == $i ]]
+		then
+			echo hi
+			return 0
+		fi
+	done
+	return 1
+}
+
+# Tirage des 6 nombres
+for (( i=0 ; i<6 ; i++ ))
+do
+	rand=$((RANDOM%46+1))
+	while existe $rand
+        do
+                rand=$((RANDOM%46+1))
+        done
+	tirage[i]=$rand
+done
+
+# Affichage du tirage
+echo ${tirage[*]}
