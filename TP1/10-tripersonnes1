@@ -10,9 +10,6 @@ then
     exit 2
 fi
 
-# Initialisation des fichiers garcons et filles (si ils existent deja, on les supprime)
-touch garcons filles
+grep -i ' m' personnes > garcons
 
-grep -i ' m$' personnes | cut -d ' ' f-1 << garcons
-
-grep -i ' f$' personnes | cut -d ' ' f-1 << filles
+grep -i ' f' personnes > filles
