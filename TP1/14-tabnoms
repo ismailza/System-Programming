@@ -1,0 +1,16 @@
+#!/bin/bash
+
+IFS=$'\n'
+
+declare -a tab_users
+declare -i i=0
+
+for user in $(cut -d: -f1 < /etc/passwd)
+do
+    tab_users[$i]="$user"
+    ((i++))
+done
+
+size=${#tab_users[*]}
+echo "Nombre des utilisateurs : $size"
+echo "Nom d'un utilisateur au hasard : ${tab_users[$RANDOM % $size]}"

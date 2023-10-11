@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -p "Entrez une suite de mots : " -a mots
+nbmots=${#mots[*]}
+echo "$nbmots => $nbmots mots ont été saisis"

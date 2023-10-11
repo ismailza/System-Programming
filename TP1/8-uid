@@ -1,0 +1,7 @@
+#!/bin/bash
+
+IFS=$IFS:' ':'=':'('
+
+set `id`
+
+echo $2

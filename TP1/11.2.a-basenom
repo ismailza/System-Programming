@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Vérifiez s'il y a au moins un argument
+if [[ $# < 1 ]]
+then
+    echo "Il faut spécifier le chemin"
+    exit 1
+fi
+
+path=$1
+
+# Supprimez tous les "/" à la fin du chemin
+while [[ $path == */ ]]; do
+  path=${path%/}
+done
+
+echo ${path##*/}

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+shopt -s extglob
+
+if [[ $# < 1 ]]
+then
+	echo "Il faut un argument"
+	exit 1
+elif [[ $1 != +([0-9]) ]]
+then
+	echo "Il faut un entier positif"
+	exit 2
+fi
+
+declare -i num=$1
+declare -i res=1
+
+while [[ $num > 1 ]]
+do
+	res=$(( res * num-- ))
+done
+echo $res

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[[ -e /bin/$1 ]]
+echo $?

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ ! -e personnes ]]
+then
+    echo "Le fichiers personnes n'existe pas"
+    exit 1
+elif [[ ! -f personnes ]]
+then
+    echo "personnes n'est pas un fichiers"
+    exit 2
+fi
+
+grep -i ' m' personnes > garcons
+
+grep -i ' f' personnes > filles

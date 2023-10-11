@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# $1 : le fichier dont on veut copier le contenu dans deux fichiers
+# $2 : le premier fichier dans lequel on veut copier le contenu
+# $3 : le deuxième fichier dans lequel on veut copier le contenu
+
+if [[ $# < 3 ]]
+then
+	echo "Il faut 3 fichiers"
+	exit -1
+elif [[ ! -e $1 ]]
+then
+	echo "$1 n'existe pas"
+	exit -1
+elif [[ ! -f $1 ]]
+then
+	echo "$1 n'est pas un fichier"
+	exit 2
+fi
+
+cp $1 $2
+cp $1 $3

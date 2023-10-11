@@ -1,0 +1,11 @@
+#!/bin/bash
+
+IFS=' '
+
+read -p "Saisir une suite de noms de répertoires : " -a reps
+
+for rep in $reps
+do
+	ls $rep
+done
+

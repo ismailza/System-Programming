@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo mon nom de connexion est : `whoami`
+echo mon repertoire courant est : `pwd`

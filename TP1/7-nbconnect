@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Nombre utilisateur connecte  localement
+
+who | wc -l
