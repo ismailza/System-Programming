@@ -1,0 +1,41 @@
+#!/bin/bash
+
+[[ $# == 3 ]] || {
+  echo "Il faut 3 arguments"
+  exit 1
+}
+
+[[ -f $1 ]] || {
+  echo "$1 n'est pas un fichier"
+  exit 2
+}
+
+[[ -r $1 ]] || {
+  echo "Le fichier $1 n'est pas accessible en lecture"
+  exit 3
+}
+
+[[ -f $2 ]] || {
+  echo "$2 n'est pas un fichier"
+  exit 4
+}
+
+[[ -r $2 ]] || {
+  echo "Le fichier $2 n'est pas accessible en lecture"
+  exit 3
+}
+
+[[ -e $3 ]] && {
+  echo "Le fichier $3 est déjà existant"
+  exit 5
+}
+
+[[ -w $(dirname $3) ]] || {
+  echo "Le répertoire $(dirname $3) n'est pas accessible en écriture"
+  exit 6
+}
+
+cat $1 $2 > $3 || {
+  echo "La concaténation a échoué"
+  exit 7
+}
