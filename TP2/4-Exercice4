@@ -1,0 +1,14 @@
+#!/bin/bash
+
+path=`pwd`
+ls $path
+if [ ! -d "ARCHIVES" ]; then
+    mkdir "ARCHIVES" ;
+fi
+
+for i in $@
+if [[-e $i]]
+then
+cp $i ARCHIVES;
+fi
+done
