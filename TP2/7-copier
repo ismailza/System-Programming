@@ -1,0 +1,31 @@
+#!/bin/bash
+
+[[ $# < 2 ]] && {
+  echo "Il faut 2 arguments"
+  exit 1
+}
+
+[[ -f $1 ]] || {
+  echo "$1 n'est pas un fichier"
+  exit 2
+}
+
+[[ -r $1 ]] || {
+  echo "Le fichier $1 n'est pas accessible en lecture"
+  exit 3
+}
+
+[[ -e $2 ]] && {
+  echo "Le fichier $2 est déjà existant"
+  exit 4
+}
+
+[[ -w $(dirname $2) ]] || {
+  echo "Le répertoire $(dirname $2) n'est pas accessible en écriture"
+  exit 5
+}
+
+cp $1 $2 || {
+  echo "La copie a échoué"
+  exit 6
+}
