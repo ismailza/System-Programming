@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]; then
+    echo "Il faut au moins un argument"
+    exit 1
+fi
+
+for user in $@
+do
+    line=`grep "^$user:x:" /etc/passwd`
+    if [[ -z $line ]]; then
+        echo "$user n'est pas un utilisateur"
+    else
+        shell=${line##*:}
+        tmp=${line%:*}
+        directory=${tmp##*:}
+        echo "Nom d'utilisateur : $user - Répertoire : $directory - Shell : $shell"
+    fi
+done
