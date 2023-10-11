@@ -1,0 +1,12 @@
+#!/bin/bash
+#Le nom des utilisateurs et le repertoire de connexion
+
+for i in $@
+do 
+repertoire='cat /etc/passwd' | grep $i ;
+if [[-z repertoire]]
+then echo "utilisateur non existant"
+else
+echo les utilisateurs sont :$i en repertoire de connexion : ${repertoire##*:};
+fi
+done

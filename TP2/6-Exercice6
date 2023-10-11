@@ -1,0 +1,8 @@
+#!/bin/bash
+# un fichier en argument, ajoute en tête du fichier la date. 
+
+echo `date`>>tmp 
+echo `cat $1`>>tmp
+echo tmp > $1
+rm tmp 
+
