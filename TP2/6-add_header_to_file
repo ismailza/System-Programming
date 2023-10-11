@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ $# < 1 ]] && {
+[[ $# == 1 ]] || {
   echo "Il faut passer un fichier en paramètres"
   exit 1
 }

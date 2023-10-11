@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ $# < 2 ]] && {
+[[ $# == 2 ]] || {
   echo "Il faut 2 arguments"
   exit 1
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ $# < 1 ]]; then
-    echo "Il faut spécifier le fichier de destination en argument"
+if [[ ! $# == 1 ]]; then
+    echo "Il faut spécifier un fichier de destination en argument"
     exit 1
 fi
 
