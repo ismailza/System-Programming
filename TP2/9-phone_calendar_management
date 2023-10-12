@@ -1,0 +1,80 @@
+#!/bin/bash
+
+echo "Gestion d'agenda téléphonique"
+
+function print_menu {
+    echo "*********************************"
+    echo "1. Ajouter une nouvelle fiche"
+    echo "2. Recherche une fiche"
+    echo "3. Détruire une fiche"
+    echo "4. Modifier une fiche"
+    echo "5. Lister l'anuaire"
+    echo "6. Fin"
+}
+
+function add_fiche {
+    read -p "Nom : " nom
+    read -p "Prénom : " prenom
+    while read -p "Téléphone : " tel
+    do
+        [[ $tel == +([[:digit:]]) && ${#tel} == 10 ]] && break
+        echo "Le numéro de téléphone doit être composé de 10 chiffres"
+    done
+    echo "$nom $prenom,$tel" >> agenda.csv
+}
+
+function search_fiche {
+    read -p "Nom : " nom
+    grep -i "$nom" agenda.csv
+}
+
+function destroy_fiche {
+    echo "TODO"
+}
+
+function modify_fiche {
+    echo "TODO"
+}
+
+function list_fiche {
+    [[ -f agenda.csv ]] || {
+        echo "L'agenda est vide"
+        return
+    }
+    cat agenda.csv
+}
+
+while :
+do
+    print_menu
+    read -p "Votre choix ? : "
+    case $REPLY in
+        1) 
+            echo "Ajout d'une nouvelle fiche"
+            add_fiche
+            ;;
+        2)
+            echo "Recherche d'une fiche"
+            search_fiche
+            ;;
+        3)
+            echo "Destruction d'une fiche"
+            destroy_fiche
+            ;;
+        4)
+            echo "Modification d'une fiche"
+            modify_fiche
+            ;;
+        5)
+            echo "Liste de l'annuaire"
+            list_fiche
+            ;;
+        6)
+            echo "Fin"
+            break
+            ;;
+        *)
+            echo "Choix invalide"
+            ;;
+    esac
+done
