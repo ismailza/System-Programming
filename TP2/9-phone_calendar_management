@@ -12,69 +12,147 @@ function print_menu {
     echo "6. Fin"
 }
 
+function verify_phone_number {
+    [[ ! ($1 == +([[:digit:]]) && ${#1} == 10) ]] && return 1
+    grep -q "$1" agenda.csv && return 2
+    return 0
+}
+
+function verify_name {
+    [[ ! ($1 == +([[:alpha:]]) && ${#1} < 3) ]] && return 1
+    return 0
+}
+
 function add_fiche {
-    read -p "Nom : " nom
-    read -p "Prénom : " prenom
+    while read -p "Nom : " nom
+    do
+        verify_name $nom
+        case $? in
+            0)
+                break
+                ;;
+            1)
+                echo "Le nom doit être composé de 3 lettres au minimum"
+                ;;
+        esac
+    done
     while read -p "Téléphone : " tel
     do
-        [[ $tel == +([[:digit:]]) && ${#tel} == 10 ]] && break
-        echo "Le numéro de téléphone doit être composé de 10 chiffres"
+        verify_phone_number $tel
+        case $? in
+            0)
+                echo "$nom,$tel" >> agenda.csv
+                echo "Fiche ajoutée avec succès"
+                break
+                ;;
+            1)
+                echo "Le numéro de téléphone doit être composé de 10 chiffres"
+                ;;
+            2)
+                echo "Le numéro de téléphone existe déjà"
+                ;;
+        esac
     done
-    echo "$nom $prenom,$tel" >> agenda.csv
 }
 
 function search_fiche {
     read -p "Nom : " nom
-    grep -i "$nom" agenda.csv
+    grep -i "$nom" agenda.csv > agenda.csv.tmp
+    if [[ ! -s agenda.csv.tmp ]]; then
+        echo "Aucun résultat pour $nom"
+        return 1
+    fi
+    cat -n agenda.csv.tmp
+    rm agenda.csv.tmp
 }
 
 function destroy_fiche {
-    echo "TODO"
+    read -p "Téléphone : " tel
+    verify_phone_number $tel
+    case $? in
+        0)
+            echo "Le numéro de téléphone n'existe pas"
+            ;;
+        1)
+            echo "Le numéro de téléphone doit être composé de 10 chiffres"
+            ;;
+        2)
+            grep -v $tel agenda.csv > agenda.csv.tmp
+            cp agenda.csv.tmp agenda.csv
+            rm agenda.csv.tmp
+            echo "Fiche supprimée avec succès"
+            ;;
+    esac
 }
 
 function modify_fiche {
-    echo "TODO"
+    read -p "Téléphone : " tel
+    if [[ ! ($tel == +([[:digit:]]) && ${#tel} == 10) ]]; then
+        echo "Le numéro de téléphone doit être composé de 10 chiffres"
+        return 1
+    fi
+    fiche=$(grep $tel agenda.csv)
+    if [[ -z $fiche ]]; then
+        echo "Le numéro de téléphone n'existe pas"
+        return 2    
+    fi
+    read -p "Nouveau nom : " N_nom
+    [[ -z $N_nom ]] && N_nom=${fiche%%,*}
+    echo "Nouveau nom : $N_nom"
+    while read -p "Nouveau téléphone : " N_tel
+    do
+        [[ -z $N_tel ]] && N_tel=${fiche#*,} && break
+        [[ ! ($N_tel == +([[:digit:]]) && ${#N_tel} == 10) ]] && echo "Le numéro de téléphone doit être composé de 10 chiffres" && continue
+        grep -q "$N_tel" agenda.csv && echo "Le numéro de téléphone existe déjà" && return 3
+        echo "Nouveau téléphone : $N_tel" && break
+    done
+    grep -v $tel agenda.csv > agenda.csv.tmp
+    echo "$N_nom,$N_tel" >> agenda.csv.tmp
+    cp agenda.csv.tmp agenda.csv
+    rm agenda.csv.tmp
+    echo "Fiche modifiée avec succès"
 }
 
 function list_fiche {
-    [[ -f agenda.csv ]] || {
-        echo "L'agenda est vide"
-        return
-    }
-    cat agenda.csv
+    if [[ -f agenda.csv && -s agenda.csv ]]; then
+        cat -n agenda.csv
+    else
+        echo "Agenda n'existe pas"
+    fi
 }
 
 while :
 do
     print_menu
     read -p "Votre choix ? : "
+    echo "*********************************"
     case $REPLY in
         1) 
-            echo "Ajout d'une nouvelle fiche"
+            echo "*** Ajout d'une nouvelle fiche"
             add_fiche
             ;;
         2)
-            echo "Recherche d'une fiche"
+            echo "*** Recherche d'une fiche"
             search_fiche
             ;;
         3)
-            echo "Destruction d'une fiche"
+            echo "*** Destruction d'une fiche"
             destroy_fiche
             ;;
         4)
-            echo "Modification d'une fiche"
+            echo "*** Modification d'une fiche"
             modify_fiche
             ;;
         5)
-            echo "Liste de l'annuaire"
+            echo "*** Liste de l'annuaire"
             list_fiche
             ;;
         6)
-            echo "Fin"
+            echo "*** Fin"
             break
             ;;
         *)
-            echo "Choix invalide"
+            echo "*** Choix invalide"
             ;;
     esac
 done

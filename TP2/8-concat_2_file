@@ -1,28 +1,28 @@
 #!/bin/bash
 
 [[ $# == 3 ]] || {
-  echo "Il faut 3 arguments"
+  echo "Le nombre d’arguments est incorrect, il faut 3 arguments"
   exit 1
 }
 
-[[ -f $1 ]] || {
-  echo "$1 n'est pas un fichier"
+[[ -r $1 ]] || {
+  echo "Le fichier $1 n’existe pas ou n'est pas accessible en lecture"
   exit 2
 }
 
-[[ -r $1 ]] || {
-  echo "Le fichier $1 n'est pas accessible en lecture"
+[[ -f $1 ]] || {
+  echo "$1 n'est pas un fichier ordinaire"
   exit 3
-}
-
-[[ -f $2 ]] || {
-  echo "$2 n'est pas un fichier"
-  exit 4
 }
 
 [[ -r $2 ]] || {
-  echo "Le fichier $2 n'est pas accessible en lecture"
-  exit 3
+  echo "Le fichier $2 n’existe pas ou n'est pas accessible en lecture"
+  exit 4
+}
+
+[[ -f $2 ]] || {
+  echo "$2 n'est pas un fichier ordinaire"
+  exit 5
 }
 
 [[ -e $3 ]] && {

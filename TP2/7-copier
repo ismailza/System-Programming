@@ -1,17 +1,17 @@
 #!/bin/bash
 
 [[ $# == 2 ]] || {
-  echo "Il faut 2 arguments"
+  echo "Le nombre d’arguments est incorrect, il faut 2 arguments"
   exit 1
 }
 
-[[ -f $1 ]] || {
-  echo "$1 n'est pas un fichier"
+[[ -r $1 ]] || {
+  echo "Le fichier $1 n’existe pas ou il n’est pas copiable (pas d’accès en lecture)"
   exit 2
 }
 
-[[ -r $1 ]] || {
-  echo "Le fichier $1 n'est pas accessible en lecture"
+[[ -f $1 ]] || {
+  echo "$1 n'est pas un fichier ordinaire"
   exit 3
 }
 
