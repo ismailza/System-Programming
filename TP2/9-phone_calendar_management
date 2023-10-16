@@ -56,13 +56,17 @@ function add_fiche {
 }
 
 function search_fiche {
-    read -p "Nom : " nom
+    while read -p "Nom : " nom
+    do
+        [[ ! ($nom == +([[:alpha:]]) && ${#nom} > 1) ]] && echo "Le nom doit être composé seulement de lettres et de 2 lettres au minimum" && continue
+        break
+    done    
     grep -i "$nom" agenda.csv > agenda.csv.tmp
-    if [[ ! -s agenda.csv.tmp ]]; then
+    if [[ -s agenda.csv.tmp ]]; then
+        cat -n agenda.csv.tmp
+    else
         echo "Aucun résultat pour $nom"
-        return 1
     fi
-    cat -n agenda.csv.tmp
     rm agenda.csv.tmp
 }
 
@@ -114,17 +118,24 @@ function modify_fiche {
 }
 
 function list_fiche {
-    if [[ -f agenda.csv && -s agenda.csv ]]; then
+    if [[ -s agenda.csv ]]; then
         cat -n agenda.csv
     else
-        echo "Agenda n'existe pas"
+        echo "Agenda vide"
     fi
 }
 
+# Main
+
+# Création du fichier agenda.csv s'il n'existe pas
+[[ -f agenda.csv ]] || touch agenda.csv
+
+# Menu
 while :
 do
     print_menu
     read -p "Votre choix ? : "
+    clear
     echo "*********************************"
     case $REPLY in
         1) 
