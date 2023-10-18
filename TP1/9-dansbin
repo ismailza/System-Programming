@@ -1,4 +1,5 @@
 #!/bin/bash
 
-[[ -e /bin/$1 ]]
+[[ $# == 0 ]] && echo "Il faut un argument!" && return 1
+ls /bin | grep -q $1
 echo $?
