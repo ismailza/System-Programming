@@ -10,7 +10,6 @@ function existe
 	do
 		if [[ $1 == $i ]]
 		then
-			echo hi
 			return 0
 		fi
 	done
