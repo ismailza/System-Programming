@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for file in $@
+do
+    if [[ -f $file ]] 
+    then
+        head -n 5 $file
+
+        read -p "Vous voulez vraiment supprimer '$file' : [y/n] 'n' "
+        [[ $REPLY == [yY] ]] && rm $file
+    else
+        echo "$file n'existe pas ou n'est pas un fichier!"
+    fi
+done

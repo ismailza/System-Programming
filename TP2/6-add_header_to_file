@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[[ $# == 1 ]] || {
+  echo "Il faut passer un fichier en paramètres"
+  exit 1
+}
+
+[[ -f $1 ]] || {
+  echo "$1 n'est pas un fichier"
+  exit 2
+}
+
+content=`cat $1`
+date > $1
+echo $content >> $1

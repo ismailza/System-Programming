@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[[ -d ARCHIVES ]] || mkdir ARCHIVES
+
+set `ls`
+
+for file in $@
+do
+    [[ -f $file ]] && cp $file "ARCHIVES/"
+done
