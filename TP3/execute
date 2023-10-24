@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[[ $# != 1 ]] && echo "Error: you must provide just one argument" && exit 1
+
+[[ ! -f $1 ]] && echo "$1 not found or not a file" && exit 1
+
+[[ ${1: -2} != ".c" ]] && echo "Error: $1 is not a C file" && exit 1
+
+exe=${1%%.c}
+
+gcc -o $exe.out $1
+
+[[ $? != 0 ]] && echo "Error: compilation failed" && exit 1
+
+./$exe.out
