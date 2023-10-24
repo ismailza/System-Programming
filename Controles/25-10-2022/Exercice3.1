@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[[ $# != 2 ]] && echo "Il faut deux arguments!" && exit 1
+
+shopt -s extglob
+
+[[ $1 != @([+-][rw]) ]] && echo "Le premier argument doit être +r, -r, +w ou -w!" && exit 1
+
+[[ $2 != .* ]] && echo "Le second argument doit être une extension!" && exit 1
+
+for file in *"$2"
+do
+  read -p "Voulez-vous modifier les droits du groupe de fichier $file? (y/n) 'n': "
+  [[ $REPLY == "y" ]] && chmod g$1 $file
+done

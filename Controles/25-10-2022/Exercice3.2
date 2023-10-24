@@ -1,0 +1,17 @@
+#!/bin/bash
+
+[[ $# != 3 ]] && echo "Le nombre d'arguments doit être égal à 3!" && exit 1
+
+shopt -s extglob
+
+[[ ! -d $1 ]] && echo "Le premier argument doit être un répertoire!" && exit 1
+
+[[ $2 != @([+-][rw]) ]] && echo "Le premier argument doit être +r, -r, +w ou -w!" && exit 1
+
+[[ $3 != .* ]] && echo "Le second argument doit être une extension!" && exit 1
+
+for file in "$1"/*"$3"
+do
+  read -p "Voulez-vous modifier les droits du groupe de fichier $file? (y/n) 'n': "
+  [[ $REPLY == "y" ]] && chmod g$2 $file
+done
