@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <sys/wait.h>
 #include <stdio.h>
 
 void print_process_characteristics();
@@ -14,8 +15,9 @@ int main()
   {
     printf("\nLe processus père :");
     print_process_characteristics();
+    wait(NULL); // Attendre la fin du fils s'il est le premier éxécuté.
   }
-  else      // On est dans le processus fils.
+  else // On est dans le processus fils.
   {
     printf("\nLe processus fils :");
     print_process_characteristics();
@@ -28,11 +30,11 @@ int main()
  */
 void print_process_characteristics()
 {
-  printf("\nIdentifiant du processus \t:\t%d", getpid());
-  printf("\nIdentifiant du processus père \t:\t%d", getppid());
-  printf("\nPropriétaire réel \t:\t%d", getuid());
-  printf("\nPropriétaire effectif \t:\t%d", geteuid());
-  printf("\nGroupe propriétaire réel \t:\t%d", getgid());
-  printf("\nGroupe propriétaire effectif \t:\t%d", getegid());
+  printf("\n%d\t: Identifiant du processus", getpid());
+  printf("\n%d\t: Identifiant du processus père", getppid());
+  printf("\n%d\t: Propriétaire réel", getuid());
+  printf("\n%d\t: Propriétaire effectif", geteuid());
+  printf("\n%d\t: Groupe propriétaire réel", getgid());
+  printf("\n%d\t: Groupe propriétaire effectif", getegid());
   printf("\n");
 }

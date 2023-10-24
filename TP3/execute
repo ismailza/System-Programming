@@ -13,3 +13,4 @@ gcc -o $exe.out $1
 [[ $? != 0 ]] && echo "Error: compilation failed" && exit 1
 
 ./$exe.out
+rm $exe.out
