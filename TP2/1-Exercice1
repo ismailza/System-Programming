@@ -1,0 +1,4 @@
+#!/bin/bash
+read -p "Veuiilez saisir les secondes à convertir" a
+echo "En Minutes est :" $(($1/60));
+echo "En Secondes est :" $(($1 % 60));

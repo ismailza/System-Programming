@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+while
+echo "Entrer un texte ou <FIN> pour quitter:\c"
+read ligne
+do
+if [ "$ligne" = "fin" -o "$ligne" = "FIN" ]
+then 
+ break 
+fi 
+echo "$ligne" >> fichligne
+
+done
+echo "le nombre de lignes saisies:" `wc-l fichligne`

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Vérifie s'il y a au moins un argument
+if [ $# -eq 0 ]; then
+    echo "Aucun fichier spécifié."
+    exit 1
+fi
+
+# Parcours de chaque argument (fichier) passé en argument
+for file in "$@"; do
+    # Vérifie si le fichier existe
+    if [ -e "$file" ]; then
+        echo "Affichage des 5 premières lignes de $file :"
+        head -n 5 "$file"
+
+        # Demande confirmation pour supprimer le fichier
+        read -p "Voulez-vous supprimer $file ? (Oui/Non) " response
+        case $response in
+           [╦oui]|[OUI]|[YES]|[yes]|[Y]) # Si la réponse est Oui
+                rm -f "$file"
+                echo "$file supprimé."
+                ;;
+            *)
+                echo "Suppression de $file annulée."
+                ;;
+        esac
+    else
+        echo "Le fichier $file n'existe pas."
+    fi
+done
