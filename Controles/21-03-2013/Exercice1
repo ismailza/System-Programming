@@ -1,0 +1,40 @@
+#!/bin/bash
+
+function display_menu
+{
+  echo "1- Vérifier l'existence d'un utilisateur"
+  echo "2- Consulter l'UID d'un utilisateur"
+  echo "3- Quitter"
+}
+
+function check_user
+{
+  read -p "Entrez le nom d'utilisateur: " user
+  grep -q "^$user:x:" /etc/passwd
+  if [[ $? == 0 ]]; then echo "L'utilisateur $user existe!"
+  else echo "L'utilisateur $user n'existe pas!"
+  fi
+}
+
+function get_user_uid
+{
+  read -p "Entrez le nom d'utilisateur: " user
+  line=$(grep "^$user:x:" /etc/passwd)
+  if [[ -n $line ]]; then echo "L'UID de l'utilisateur $user est: $(echo $line | cut -d: -f3)"
+  else echo "L'utilisateur $user n'existe pas!"
+  fi
+}
+
+# Main
+while :
+do
+  echo "************************************"
+  display_menu
+  read -p "Entrez votre choix: " choice
+  case $choice in
+    1) check_user ;;
+    2) get_user_uid ;;
+    3) exit 0 ;;
+    *) echo "Choix invalide!" ;;
+  esac
+done
