@@ -1,0 +1,12 @@
+#!/bin/bash
+
+while read line
+do
+  IFS=$IFS:':'
+  set $line
+  set $@
+  if (( $3 > 100 ))
+  then
+    echo "username : $1 - UID : $3"
+  fi
+done < /etc/passwd
