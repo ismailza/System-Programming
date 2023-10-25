@@ -1,0 +1,9 @@
+#!/bin/bash
+
+[[ $# != 1 ]] && echo "Il faut un seul arguments" && exit 1
+
+[[ ! ( -f "$1.c" && -r "$1.c" ) ]] && echo "$1 doit être un fichier et accessible en lecture!" && exit 1
+
+grep -q "main()" "$1.c" || echo "Il n'y a pas de fonction main()" || exit 1
+
+gcc -o "$1.out" "$1.c"
