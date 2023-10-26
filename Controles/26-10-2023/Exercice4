@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]; then
+  echo "Il faut un argument"
+  read -p "Saississez le fichier à traiter : "
+  set $REPLY
+fi
+
+function checkUser
+{
+  grep -q "^$1:x:" /etc/passwd && return 0
+  return 1
+}
+
+while read login nom prenom
+do
+  if checkUser $login; then
+    echo "$login $nom $prenom"
+  fi
+done < $1
