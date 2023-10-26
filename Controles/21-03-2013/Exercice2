@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]
+then
+  read -p "Entrer le nom du fichier contenant le nom des élèves et leurs 3 notes : " file
+  set $file
+fi
+[[ ! ( -f $1 && -r $1 ) ]] && echo "Le fichier $1 n'existe pas ou n'est pas accessible en lecture" && exit 1
+file=$1
+while read nom a b c
+do
+  echo "Nom : $nom - Moyenne : $(( (a + b + c) / 3 ))"
+done < $file

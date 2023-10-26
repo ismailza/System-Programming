@@ -1,0 +1,20 @@
+#!/bin/bash
+
+[[ $# != 2 ]] && echo "Il faut deux arguments!" && exit 1
+
+[[ "${1:0:1}" != "." || "${2:0:1}" != "." ]] && echo "Les arguments doivent être des extensions!" && exit 1
+
+for file in *"$1"
+do
+  if [[ -f $file ]]
+  then
+    newFile="${file%$1}$2"
+    [[ -e "$newFile" ]] && echo "Le fichier $newFile existe déjà!" && continue
+    if cp "$file" "$newFile" && rm "$file"
+    then
+      echo "Le fichier $file a été renommé en $newFile"
+    else
+      echo "Le fichier $file n'a pas été renommé en $newFile"
+    fi
+  fi
+done

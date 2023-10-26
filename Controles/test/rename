@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function fun()
+{
+	cp $1 ${1%.*}$2
+	rm $1
+}
+export -f fun
+find . -name "*$1" -exec bash -c 'fun {} $2' \;

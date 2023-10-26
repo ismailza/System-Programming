@@ -1,0 +1,19 @@
+#!/bin/bash
+
+[[ $# < 1 ]] && echo "Il faut au moins un argument" && exit 1
+
+read -p "Saissisez le nom du fichier dont vous voulez chercher : " file
+
+[[ ! -f "$file" ]] && echo "$file n'existe pas ou n'est pas un fichier" && exit 1
+
+read -p "Saisissez le fichier de sortie : " result
+
+[[ -f "$result" ]] && echo "$result existe déjà" && exit 1
+
+> "$result"
+
+for word in $@
+do
+  echo "Les lignes qui contiennent <<$word>> : " >> "$result"
+  grep -w "$word" "$file" >> "$result"
+done

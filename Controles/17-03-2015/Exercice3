@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Vérifier nombre d'arguments
+[[ $# != 1 ]] && echo "Il faut un seul argument" && exit 18
+
+# Extraire le nom du fichier
+file=$1
+while [[ "$file" == *"/" ]]
+do
+  file=${file%/*}
+done
+
+file=${file##*/}
+
+# Vérifier si le fichier existe
+[[ ! -e $1 ]] && echo "Attention!, $file n'existe pas" && exit 19
+
+# Vérifier si le fichier est un fichier régulier et accessible en lecture
+[[ -f $1 && -r $1 ]] && cat $1
+
+# Vérifier si le fichier est avec droit en exécution
+[[ -f $1 && -x $1]] && chmod u-x $1 && && echo "Droit en exécution est retiré sur le fichier : $file"

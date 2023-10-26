@@ -1,0 +1,14 @@
+#!/bin/bash
+
+declare -i files=0
+declare -i dirs=0
+
+for file in *
+do
+  if [[ -f $file ]]; then (( files++ ))
+  elif [[ -d $file ]]; then (( dirs++ ))
+  fi
+done
+
+echo "Fichiers : $files"
+echo "Répertoires : $dirs"
