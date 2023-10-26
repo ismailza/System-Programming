@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]; then
+  echo "Il faut un seul argument"
+  read -p "Saisir le nom du fichier : "
+  set $REPLY
+fi
+
+[[ -r $1 || -f $1 ]] || { echo "Le fichier n'existe pas ou n'est pas accessible en lecture"; exit 1; }
+
+> FichMoy
+
+while read nom note1 note2 note3; do
+  echo "Nom: $nom - Moyenne : $(( (note1 + note2 + note3) / 3 ))" | tee -a FichMoy
+done < $1

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+[[ $# != 1 ]] && { echo "Il faut argument"; exit 1; }
+
+function recycle_l
+{
+  ls $HOME/corbeille
+}
+
+function recycle_r
+{
+  rm -rf $HOME/corbeille/*
+}
+
+function recycle_c
+{
+  for file in $@; do
+    if cp $file $HOME/corbeille/; then
+      if ! rm $file; then
+        echo "Erreur lors de la suppression de $file"
+      fi
+    fi
+  done
+}
+
+[[ -e $HOME/corbeille ]] || mkdir $HOME/corbeille
+
+case $1 in
+  -l) [[ -n $2 ]] && { echo "Il ne faut pas d'argument avec l'option -l"; exit 1; }
+      recycle_l;;
+  -r) [[ -n $2 ]] && { echo "Il ne faut pas d'argument avec l'option -l"; exit 1; }
+      recycle_r;;
+  *)  recycle_c $@;;
+esac
