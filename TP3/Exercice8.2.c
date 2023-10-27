@@ -49,5 +49,5 @@ void run_command(char *name, char **argv)
     exit(1);
   }
   else
-    wait(NULL);
+    waitpid(pid, NULL, 0);
 }
