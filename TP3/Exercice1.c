@@ -1,6 +1,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void print_50(int);
 
@@ -11,13 +13,29 @@ void print_50(int);
  */
 int main()
 {
-  if (!fork())      // Créer un premier fils.
+  pid_t pid;
+  if ((pid = fork()) == -1) // Créer un processus fils et vérifier qu'il a bien été créé.
+  {
+    perror("Erreur lors de la creation du premier processus fils.");
+    exit(-1);
+  }
+  else if (!pid)    // Si on est dans le processus fils.
     print_50(1);    // Afficher les 50 premiers nombres.
-  else
+  else              // Si on est dans le processus père.
   {
     wait(NULL);     // Attendre la fin du premier fils.
-    if (!fork())    // Créer un deuxième fils.
+    if ((pid = fork()) == -1) // Créer un deuxième processus fils et vérifier qu'il a bien été créé.
+    {
+      perror("Erreur lors de la creation du deuxieme processus fils.");
+      exit(-1);
+    }
+    else if (!pid)  // Si on est dans le deuxième processus fils.
       print_50(51); // Afficher les 50 nombres suivants.
+    else            // Si on est dans le processus père.
+    {
+      wait(NULL); // Attendre la fin du deuxième fils.
+      printf("\n");
+    }
   }
   return 0;
 }
@@ -31,5 +49,4 @@ void print_50(int start)
   int end = start + 50;
   for (int i = start; i < end; i++)
     printf("%d ", i);
-  printf("\n");
 }
