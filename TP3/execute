@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ $# != 1 ]] && echo "Error: you must provide just one argument" && exit 1
+[[ $# < 1 ]] && echo "Error: no file specified" && exit 1
 
 [[ ! -f $1 ]] && echo "$1 not found or not a file" && exit 1
 
@@ -12,5 +12,5 @@ gcc -o $exe.out $1
 
 [[ $? != 0 ]] && echo "Error: compilation failed" && exit 1
 
-./$exe.out
+./$exe.out ${@:2}
 rm $exe.out
