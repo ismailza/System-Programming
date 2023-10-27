@@ -19,11 +19,11 @@ int main()
     perror("Erreur lors de la creation du processus fils.");
     exit(-1);
   }
-  else if (!pid)                                // On est dans le processus fils.
-    exit(execv("/bin/ps", arg)); // On exécute la commande ps -l.
-  else                                          // On est dans le processus père.
+  else if (!pid)                  // On est dans le processus fils.
+    exit(execv("/bin/ps", arg));  // On exécute la commande ps -l.
+  else                            // On est dans le processus père.
   {
-    wait(&status); // On attend la fin du processus fils.
+    wait(&status);  // On attend la fin du processus fils.
     printf("Le processus fils s'est terminé avec le code de retour %d.\n", WEXITSTATUS(status));
   }
 
