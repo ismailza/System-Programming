@@ -23,7 +23,11 @@ int main(int argc, char **argv)
   char *commande = malloc(sizeof(char) * (strlen("cat ") + strlen(argv[1]) + 1));
   strcpy(commande, "cat ");
   // On concatène la commande avec le nom du fichier et on l'exécute.
-  system(strcat(commande, argv[1]));
+  if (system(strcat(commande, argv[1])) == -1)
+  {
+    printf("Erreur lors de l'exécution de la commande cat.\n");
+    exit(1);
+  }
 
   return 0;
 }
