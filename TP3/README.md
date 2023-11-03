@@ -1,6 +1,6 @@
 <h1 align="center">Programmation Système</h1>
 
-<h2>TP1 – Gestion des Processus sous Unix</h2>
+<h2>TP3 – Gestion des Processus sous Unix</h2>
 
 ### Exercice 1
 Ecrire un programme C qui crée deux fils, l'un affiche les entiers de 1 à 50, l'autre de 51 à 100. Il faut que l'affichage soit 1 2...100.

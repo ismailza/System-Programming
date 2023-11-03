@@ -1,6 +1,6 @@
 <h1 align="center">Programmation Système</h1>
 
-<h2>TP1 – Programmation Bash</h2>
+<h2>TP2 – Programmation Bash</h2>
 
 ### Exercice 1 
 Ecrivez un script qui convertit en minutes et secondes un temps exprimé en secondes (le temps est passé en paramètre). 
