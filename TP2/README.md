@@ -1,6 +1,23 @@
 <h1 align="center">Programmation Système</h1>
 
-<h2>TP2 – Programmation Bash</h2>
+## TP2 – Programmation Bash
+
+### Utilisation
+Avant d'utiliser les scripts, assurez-vous que les permissions d'exécution sont attribuées.
+Vous pouvez le faire en exécutant la commande suivante, si nécessaire :
+```bash
+chmod +x *
+```
+Cette commande accorde le droit d'exécution à tous les scripts présents dans le répertoire.
+
+Pour exécuter un script spécifique, utilisez la commande suivante :
+```bash
+./script_name [arguments]
+```
+Assurez-vous de remplacer `script_name` par le nom du script que vous souhaitez exécuter et d'inclure les arguments si nécessaires.
+Cette approche simplifie le processus d'utilisation de vos scripts et garantit une exécution appropriée.
+
+<hr>
 
 ### Exercice 1 
 Ecrivez un script qui convertit en minutes et secondes un temps exprimé en secondes (le temps est passé en paramètre). 

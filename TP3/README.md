@@ -1,6 +1,27 @@
 <h1 align="center">Programmation Système</h1>
 
-<h2>TP3 – Gestion des Processus sous Unix</h2>
+## TP3 – Gestion des Processus sous Unix
+
+### Utilisation
+Dans ce répertoire, vous trouverez un script Bash nommé `execute`, conçu pour simplifier le processus de compilation et d'exécution des fichiers source C. Vous pouvez utiliser ce script pour rendre votre flux de travail plus efficace.
+
+Assurez-vous d'avoir les permissions d'exécution pour le script. Si ce n'est pas le cas, exécutez la commande suivante :
+```bash
+chmod +x execute
+```
+Ensuite, vous pouvez compiler et exécuter un fichier source C en utilisant le script execute de la manière suivante :
+```bash
+./execute fichier.c [arguments]
+```
+- `fichier.c`: Le nom du fichier source C que vous souhaitez compiler et exécuter.
+- `arguments`: **(Facultatif)** Les arguments que vous souhaitez passer au programme C une fois qu'il est compilé et exécuté.
+
+Assurez-vous que le fichier execute est présent dans le répertoire et a les bonnes autorisations d'exécution.
+
+### Avertissement
+Ce script suppose que vous avez le compilateur `GCC` installé sur votre système. Assurez-vous que GCC est disponible avant d'utiliser ce script.
+
+<hr>
 
 ### Exercice 1
 Ecrire un programme C qui crée deux fils, l'un affiche les entiers de 1 à 50, l'autre de 51 à 100. Il faut que l'affichage soit 1 2...100.
