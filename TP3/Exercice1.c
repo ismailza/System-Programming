@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Prototypes
+
 void print_50(int);
 
 /**

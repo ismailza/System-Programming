@@ -8,6 +8,7 @@
 #define MAX_CMD_LENGTH 10
 
 // Prototypes
+
 char *read_command_line();
 char **split_command_line(char *);
 void run_command(char **);

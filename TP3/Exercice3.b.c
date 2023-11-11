@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 // Prototypes
+
 int is_in_tab(int *, int, int);
 
 /**

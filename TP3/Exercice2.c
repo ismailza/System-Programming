@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 // Prototypes
+
 void print_process_characteristics(char *);
 
 /**
