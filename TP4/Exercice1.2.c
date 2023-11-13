@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void sigchld_handler(int);
+
 /**
  * main - Fonction principale du programme.
  * 
@@ -13,8 +15,8 @@
 int main(int argc, char *argv[])
 {
   pid_t pid;
-  // Ignorer le signal SIGCHLD pour éviter que le fils ne devienne un zombie
-  signal(SIGCHLD, SIG_IGN);
+  // Définition du gestionnaire de signal pour SIGCHLD
+  signal(SIGCHLD, sigchld_handler);
   // Création du processus fils
   if ((pid = fork()) == -1)
   {
@@ -31,4 +33,18 @@ int main(int argc, char *argv[])
     ; // Simule un calcul infini
 
   return 0;
+}
+
+/**
+ * sigchld_handler - Gestionnaire de signal pour SIGCHLD, elle permet d'attendre un processus fils
+ *                  sans bloquer le processus pere.
+ * @signal: Le signal capturé.
+*/
+void sigchld_handler(int signal)
+{
+  int status;
+  // Attendre la fin d'un processus fils sans bloquer le processus parent
+  pid_t pid = waitpid(-1, &status, WNOHANG);
+  // Afficher le pid du processus fils terminé
+  printf("Processus fils avec PID : %d est termine\n", pid);
 }
