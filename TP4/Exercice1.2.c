@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 void sigchld_handler(int signal)
 {
   int status;
-  // Attendre la fin d'un processus fils sans bloquer le processus parent
-  pid_t pid = waitpid(-1, &status, WNOHANG);
+  // Récupérer le statut de sortie de processus fils pour eviter qu'il devienne un zombie.
+  pid_t pid = wait(&status);
   // Afficher le pid du processus fils terminé
   printf("Processus fils avec PID : %d est termine\n", pid);
 }
