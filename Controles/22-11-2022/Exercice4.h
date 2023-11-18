@@ -23,29 +23,6 @@ void handle_error(char *msg)
 }
 
 /**
- * is_number - Vérifie si une chaîne de caractères représente un nombre.
- * @chaine: Chaîne de caractères à vérifier.
- *
- * Return: 1 si @chaine est un nombre, 0 sinon.
- */
-int is_number(const char *chaine)
-{
-  char *endptr;
-  // Convertir la chaîne en un nombre à virgule flottante (double).
-  strtod(chaine, &endptr);
-  // Vérifie si le pointeur de fin pointe à la fin de la chaîne et que la chaîne n'est pas vide
-  return (*endptr == '\0' || isspace((unsigned char)*endptr)) && (endptr != chaine);
-}
-
-char is_operator(const char *chaine)
-{
-  if (strlen(chaine) == 1)
-    if ((chaine[0] == '+') || (chaine[0] == '-') || (chaine[0] == '*') || (chaine[0] == '/'))
-      return chaine[0];
-  handle_error("Operateur inconnu!!\n");
-}
-
-/**
  * calculate - Effectuer le calcule d'une opération arithmétique.
  * @num1: Le premier opérande
  * @op: l'opérateur

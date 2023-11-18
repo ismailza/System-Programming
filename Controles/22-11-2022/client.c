@@ -3,56 +3,46 @@
 #define QUESTION "cli2serv"
 #define REPONSE "serv2cli"
 
-int main(int argc, char *argv[])
+int main()
 {
-  if (argc != 4)
-    handle_error("Erreur, nombre d'arguments est incorrect!\n");
-  
-  if (!is_number(argv[1]) || !is_number(argv[3]))
-    handle_error("Erreur, il faut que les arguments soient des nombres!\n");
-  
-  char op = is_operator(argv[2]);
   int fdR, fdW;
-  double num1, num2, result;
-  char req[MAX];
+  char result[10], req[MAX];
 
-  
-    // Ouverture du premier tube en écriture
-    fdW = open(QUESTION, O_WRONLY);
-    if (fdW == -1)
-      handle_error("Erreur lors de la creation du premier tube!!\n");
-    
-    // printf("Entrer votre operation (ex. a + b) : ");
+  // Ouverture du premier tube en écriture
+  fdW = open(QUESTION, O_WRONLY);
+  if (fdW == -1)
+    handle_error("Erreur lors de l'ouverture du premier tube!\nVerifier que vous avez lancer le serveur!\n");
 
-    // scanf("%lf %c %lf", &num1, &op, &num2);
+  // Ouverture du second tube en lecture
+  fdR = open(REPONSE, O_RDONLY);
+  if (fdR == -1)
+    handle_error("Erreur lors de l'ouverture du premier tube!\nVerifier que vous avez lancer le serveur!\n");
 
-    num1 = atof(argv[1]);
-    num2 = atof(argv[3]);
+  do
+  {
+    printf("Entrer votre operation (ex. a + b) : ");
 
-    sprintf(req, "%lf %c %lf", num1, op, num2);
-    
-    printf("Envoi de l'operation au serveur...\n");
+    if (!gets(req))
+      continue;
 
+    printf("Client : Envoi de l'operation au serveur...\n");
     write(fdW, &req, sizeof(req));
 
-    close(fdW);
-    
-    // Ouverture du second tube en lecture
-    fdR = open(REPONSE, O_RDONLY);
-    if (fdR == -1)
-      handle_error("Erreur lors de la creation du second tube!!\n");
+    read(fdR, &result, sizeof(result));
 
-    printf("Reception du resultat...\n");
-    
-    read(fdR, &result, sizeof(double));
-    
-    close(fdR);
-    
-    printf("Resultat de %.2f %c %.2f est : %.2f\n", num1, op, num2, result);
+    if (!strcmp(result, "ciao"))
+    {
+      printf("%s\n", result);
+      break;
+    }
 
-    printf("\n");
-    
-  
+    printf("Resultat de %s est : %.2f\n", req, atof(result));
+    printf("--------------------------------------------------------\n");
+
+  } while (1);
+
+  close(fdW);
+  close(fdR);
 
   return 0;
 }
