@@ -1,45 +1,52 @@
 #include "Exercice4.h"
 
-#define TUBE1 "cli2serv"
-#define TUBE2 "serv2cli"
+#define QUESTION "cli2serv"
+#define REPONSE "serv2cli"
 
 int main(int argc, char *argv[])
 {
   int fdR, fdW;
   double num1, num2, result;
+  char op;
+  char req[MAX];
 
   // Création du premier tube s'il n'existe pas
-  if (access(TUBE1, F_OK) == -1)
-    if (mkfifo(TUBE1, 0666) == -1)
+  if (access(QUESTION, F_OK) == -1)
+    if (mkfifo(QUESTION, 0666) == -1)
       handle_error("Erreur lors de la creation du premier tube!\n");
 
-  // Ouverture du premier tube en écriture
-  fdR = open(TUBE1, O_RDONLY);
-  if (fdR == -1)
-    handle_error("Erreur lors de la creation du premier tube!!\n");
-
-  read(fdR, &num1, sizeof(num1));
-  read(fdR, &num2, sizeof(num2));
-
-  close(fdR);
-
-  result = num1 + num2;
-
   // Création du second tube s'il n'existe pas
-  if (access(TUBE2, F_OK) == -1)
-    if (mkfifo(TUBE2, 0666) == -1)
+  if (access(REPONSE, F_OK) == -1)
+    if (mkfifo(REPONSE, 0666) == -1)
       handle_error("Erreur lors de la creation du second tube!\n");
 
-  // Ouverture du second tube en lecture
-  fdW = open(TUBE2, O_WRONLY);
-  if (fdW == -1)
-    handle_error("Erreur lors de la creation du second tube!!\n");
   
-  printf("Envoi du resultat au client...\n");
+    // Ouverture du premier tube en écriture
+    fdR = open(QUESTION, O_RDONLY);
+    if (fdR == -1)
+      handle_error("Erreur lors de la creation du premier tube!!\n");
 
-  write(fdW, &result, sizeof(double));
-  
-  close(fdW);
+    printf("Reception de la requette...\n");
+
+    read(fdR, req, MAX);
+
+    sscanf(req, "%lf %c %lf", &num1, &op, &num2);
+
+    close(fdR);
+
+    // Ouverture du second tube en lecture
+    fdW = open(REPONSE, O_WRONLY);
+    if (fdW == -1)
+      handle_error("Erreur lors de la creation du second tube!!\n");
+    
+    result = calculate(num1, op, num2);
+
+    printf("Envoi du resultat au client...\n");
+
+    write(fdW, &result, sizeof(double));
+    
+    close(fdW);
+
 
   return 0;
 }
