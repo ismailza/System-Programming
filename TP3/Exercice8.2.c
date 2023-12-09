@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 // Prototypes
+
 void run_command(char *, char **);
 
 /**
@@ -21,8 +22,6 @@ int main()
   run_command("who", who_argv);
   run_command("ps", ps_argv);
   run_command("ls", ls_argv);
-  // On attend la fin de l'exécution des processus fils
-  while (wait(NULL) != -1);
 
   return 0;
 }
